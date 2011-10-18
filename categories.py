@@ -2,8 +2,11 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 class categoryGrid(QWidget):
-	def __init__(self, cols):
+
+	def __init__(self, cols, pred):
 		super(categoryGrid, self).__init__()
+
+		self.pred = pred
 		
 		self.layout = QGridLayout()
 		self.layout.setHorizontalSpacing(5)
@@ -20,6 +23,7 @@ class categoryGrid(QWidget):
 			widget.setMaxLength(30)
 			#w.setMaximumWidth(100)
 			self.layout.addWidget(widget, 0, j)
+
 	def add(self, cols):
 		widget = QLineEdit()
 		self.layout.addWidget(widget, 0, cols)

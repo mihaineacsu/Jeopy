@@ -5,13 +5,11 @@ from categories import categoryGrid
 from grid import questionGrid
 
 class mainWindow(QWidget):
-	def __init__(self, title , width , height , pred, parent = None):
+	def __init__(self, title, width, height, pred, parent = None):
 		super(mainWindow, self).__init__(None)
 		
 		self.pred = pred
 		
-			
-	
 		self.setMinimumSize(width, height)
 		self.setWindowTitle(title)
 		
@@ -36,8 +34,8 @@ class mainWindow(QWidget):
 		self.rows = 2
 		self.cols = 2
 		
-		self.categories = categoryGrid(self.cols)	
-		self.questions = questionGrid(self.rows, self.cols, parent = self.parent())
+		self.categories = categoryGrid(self.cols, pred = self)	
+		self.questions = questionGrid(self.rows, self.cols, self, parent = self.parent())
 		
 		self.saveButton = QPushButton("Save")
        		self.cancelButton = QPushButton("Cancel")

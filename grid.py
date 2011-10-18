@@ -3,8 +3,10 @@ from PyQt4.QtGui import *
 from QuestionEditorWidget import QuestionEditor
 
 class questionGrid(QWidget):
-	def __init__(self, rows, cols, parent = None):
+	def __init__(self, rows, cols, pred, parent = None):
 		QWidget.__init__(self)
+
+		self.pred = pred
 		
 		self.buttons = []
 		self.layout = QGridLayout()	
@@ -13,6 +15,7 @@ class questionGrid(QWidget):
 		self.isOpen = False
 
 		self.setupGui(rows, cols)
+
 	def setupGui(self, rows, cols):	
 		#layout.setHorizontalSpacing(5)
 		self.layout.setSpacing(10)
@@ -20,7 +23,7 @@ class questionGrid(QWidget):
 			for j in range(cols): #coloana j=m
 				widget = QPushButton()
 				self.buttons.append(widget)
-			#	widget.setText(str(i * cols + j))
+				#widget.setText(str(i * cols + j))
 	                        widget.setText(str(self.buttons.index(widget)))
 
 				self.layout.addWidget(widget, i, j)
@@ -68,7 +71,8 @@ class questionGrid(QWidget):
 	def showQEditor(self):
 		if self.isOpen == False:
 			widget = self.sender()
-			self.QEditor = QuestionEditor(0,"shiny unicorns", self)
+			categoryText = self.pred.categories.buttons[int(widget.text()) % self.pred.cols]
+			self.QEditor = QuestionEditor(1 + int(widget.text()), categoryText.text() , self)
 			self.isOpen = True
 			self.QEditor.show()
 			widget = self.sender()

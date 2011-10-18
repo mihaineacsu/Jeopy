@@ -3,12 +3,11 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from gameEditor import mainWindow
 from QuestionEditorWidget import QuestionEditor
-class RoundsEditor(QWidget):
 
+class RoundsEditor(QWidget):
     buttonClicked = pyqtSignal(int)
     
     def __init__(self, parent = None):
-
         super(RoundsEditor, self).__init__(parent)
 
         self.type = "html"
@@ -116,7 +115,6 @@ class RoundsEditor(QWidget):
         self.getButton(self.count).setEnabled(False)
         
     def enableButton(self, string):
-
         button = self.getButton(self.count) # button -> last made button
         lineedit = self.getLineEdit(self.count) # lineedit -> last made lineedit
 
@@ -129,7 +127,6 @@ class RoundsEditor(QWidget):
         else:
             if self.getLineEdit(self.count-1).text() == "": # if second to last one is empty, remove last one
                 self.removeRound()
-
 
     def editRound(self):
         row = (self.layout.indexOf(self.sender())-2) /3
@@ -145,15 +142,14 @@ class RoundsEditor(QWidget):
         print self.rounds
         
         if self.isOpen == False:
-            round_ =  mainWindow(self.rounds[row]['title'], self.size["width"], self.size["height"], self)
+            self.round_ =  mainWindow(self.rounds[row]['title'], self.size["width"], self.size["height"], self)
             self.isOpen = True
-            round_.show()
+            self.round_.show()
         else:
             print "cannot open other editor, current window still running"
             #maybe add a warning
 
     def saveGame(self):
-
         # if any changes are made tot the rounds names after 'edit'
         # they will be updated in the self.rounds list
         for i in range(self.count):
