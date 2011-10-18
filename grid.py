@@ -24,7 +24,7 @@ class questionGrid(QWidget):
 				widget = QPushButton()
 				self.buttons.append(widget)
 				#widget.setText(str(i * cols + j))
-	            widget.setText(str(self.buttons.index(widget)))
+				widget.setText(str(self.buttons.index(widget)))
 
 				self.layout.addWidget(widget, i, j)
 				widget.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
