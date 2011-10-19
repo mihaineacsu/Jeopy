@@ -7,6 +7,8 @@ class questionGrid(QWidget):
 		QWidget.__init__(self)
 
 		self.pred = pred
+
+		self.d = {}
 		
 		self.buttons = []
 		self.layout = QGridLayout()	

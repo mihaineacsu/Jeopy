@@ -13,6 +13,8 @@ class QuestionEditor(QWidget):
         self.setupGui(number, category)
         self.pred = pred
         self.d = {}
+        self.category = str(category)
+        self.number = number
         #print self.parent()
  
     def setupGui(self, number, category):
@@ -127,10 +129,8 @@ class QuestionEditor(QWidget):
         self.d["answer"] = str(self.getCenterLayout().itemAtPosition(1, 1).widget().text())
         self.d["value"] = int(self.getCenterLayout().itemAtPosition(2, 1).widget().text())
         self.d["template"] = self.template
-        self.pred.d[self.c]["questions"][self.q] = self.d
-        # where self.c is the category number [in the "categories" list]
-        # and self.q is the question number [in the "questions" list] self.q
-
+        self.pred.d[str(self.number)] = self.d
+		#self.number is the question number
         
         print self.d["statement"]
         print self.d["answer"]
