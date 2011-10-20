@@ -47,6 +47,8 @@ class questionGrid(QWidget):
 
 	def remRow(self, rows, cols):
 		for j in range(cols):
+			if str(self.buttons[-1].text()) in self.d:
+				del self.d[str(self.buttons[-1].text())]
 			self.buttons[-1].hide()
 			self.layout.removeWidget(self.buttons[-1])
 			self.buttons.remove(self.buttons[-1])
@@ -65,6 +67,8 @@ class questionGrid(QWidget):
 			
 	def remColumn(self, rows, cols):
 		for i in reversed(range(rows)):
+			if str(self.buttons[cols + (i * (cols + 1))].text()) in self.d:
+				del self.d[str(self.buttons[cols + (i * (cols + 1))].text())]
 			self.buttons[cols + (i * (cols + 1))].hide()
 			self.layout.removeWidget(self.buttons[cols + (i * (cols + 1))])
 			self.buttons.remove(self.buttons[cols+(i * (cols + 1))])
@@ -74,7 +78,11 @@ class questionGrid(QWidget):
 		if self.isOpen == False:
 			widget = self.sender()
 			categoryText = self.pred.categories.buttons[int(widget.text()) % self.pred.cols]
-			self.QEditor = QuestionEditor(1 + int(widget.text()), categoryText.text() , self)
+			if str(widget.text()) in self.d:
+				self.dToSend = self.d[str(widget.text())]
+			else:
+				self.dToSend = {"statement" : "Dennis Ritchie", "answer" : "    Who developed C?", "template" : "template.html"}
+			self.QEditor = QuestionEditor(1 + int(widget.text()), categoryText.text(), self, self.dToSend)
 			self.isOpen = True
 			self.QEditor.show()
 			widget = self.sender()

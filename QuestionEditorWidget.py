@@ -4,15 +4,15 @@ from PyQt4.QtCore import *
 
 class QuestionEditor(QWidget):
 
-    def __init__(self, number, category, pred, parent = None):
+    def __init__(self, number, category, pred, d, parent = None):
 
         super(QuestionEditor, self).__init__(parent)
 
         self.template = ''
 
+        self.d = d
         self.setupGui(number, category)
         self.pred = pred
-        self.d = {}
         self.category = str(category)
         self.number = number
         #print self.parent()
@@ -38,9 +38,9 @@ class QuestionEditor(QWidget):
         
 
         # editing all Labels and LineEdit widgets
-        statementLine = QLineEdit("Dennis Ritchie")
+        statementLine = QLineEdit(self.d["statement"])
         statementLine.setFixedWidth(250)
-        answerLine = QLineEdit("Who developed C?")
+        answerLine = QLineEdit(self.d["answer"])
 
         valueSpinBox = QDoubleSpinBox()
         valueSpinBox.setRange(0, 100000)
@@ -51,7 +51,7 @@ class QuestionEditor(QWidget):
         valueSpinBox.setValue(100)
         #valueSpinBox.setSuffix(" p")
 
-        self.template = 'template.html'
+        self.template = self.d['template']
         path = os.path.dirname(sys.argv[0]) + "\\cdl_talk\\template.html"
         path = path.replace('\\', '/')
         self.templateBrowse = QLineEdit(path)
@@ -129,7 +129,7 @@ class QuestionEditor(QWidget):
         self.d["answer"] = str(self.getCenterLayout().itemAtPosition(1, 1).widget().text())
         self.d["value"] = int(self.getCenterLayout().itemAtPosition(2, 1).widget().text())
         self.d["template"] = self.template
-        self.pred.d[str(self.number)] = self.d
+        self.pred.d[str(self.number - 1)] = self.d
 		#self.number is the question number
         
         print self.d["statement"]
