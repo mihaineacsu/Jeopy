@@ -38,7 +38,10 @@ class mainWindow(QWidget):
 		self.questions = questionGrid(self.rows, self.cols, self, parent = self.parent())
 		
 		self.saveButton = QPushButton("Save")
-       		self.cancelButton = QPushButton("Cancel")
+		self.cancelButton = QPushButton("Cancel")
+
+		self.saveButton.clicked.connect(self.saveRound)
+		self.cancelButton.clicked.connect(self.close)
 
 		layout = QGridLayout()
 		
@@ -81,14 +84,15 @@ class mainWindow(QWidget):
 			self.questions.addRow(self.rows, self.cols)
 
 	def saveRound(self):
-		pass
-#		for c ... :
+		
+#		for c in  :
 #		self.d[c]["title"] = ...
 #		self.pred["rounds"][self.r]["categories"] = self.d
-            
+		self.close()    
 
 	def closeEvent(self, event):
 		self.pred.isOpen = False
+		self.close()
     
 def main():
 	app = QApplication(sys.argv)

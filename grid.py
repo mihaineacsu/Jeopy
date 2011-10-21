@@ -78,10 +78,15 @@ class questionGrid(QWidget):
 		if self.isOpen == False:
 			widget = self.sender()
 			categoryText = self.pred.categories.buttons[int(widget.text()) % self.pred.cols]
+			self.value = 100 * int((2 + int(widget.text())) / self.pred.cols)
+			print widget.text()
 			if str(widget.text()) in self.d:
 				self.dToSend = self.d[str(widget.text())]
 			else:
-				self.dToSend = {"statement" : "Dennis Ritchie", "answer" : "    Who developed C?", "template" : "template.html"}
+				self.dToSend = {"statement" : "Dennis Ritchie", 
+								"answer" : "    Who developed C?", 
+								"value" : self.value, 
+								"template" : "template.html"}
 			self.QEditor = QuestionEditor(1 + int(widget.text()), categoryText.text(), self, self.dToSend)
 			self.isOpen = True
 			self.QEditor.show()

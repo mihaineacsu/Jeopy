@@ -48,7 +48,7 @@ class QuestionEditor(QWidget):
         valueSpinBox.setDecimals(0)
         valueSpinBox.setFixedWidth(80)
 
-        valueSpinBox.setValue(100)
+        valueSpinBox.setValue(self.d["value"])
         #valueSpinBox.setSuffix(" p")
 
         self.template = self.d['template']
