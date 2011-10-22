@@ -5,11 +5,12 @@ from categories import categoryGrid
 from grid import questionGrid
 
 class mainWindow(QWidget):
-	def __init__(self, title, width, height, pred, parent = None):
+	def __init__(self, row, title, width, height, pred, parent = None):
 		super(mainWindow, self).__init__(None)
 		
 		self.pred = pred
-		
+		self.row = row
+
 		self.setMinimumSize(width, height)
 		self.setWindowTitle(title)
 		
@@ -84,10 +85,23 @@ class mainWindow(QWidget):
 			self.questions.addRow(self.rows, self.cols)
 
 	def saveRound(self):
+		self.d = self.questions.d   
+		self.categories_ = []
+		cNumber = 0
+		for c in self.categories.buttons:
+			self.cDict = {"title" : str(c.text()),
+						"questions" : []}
+			i = cNumber
+			while i < len(self.d):
+				self.cDict["questions"].append(self.d[str(i)])
+				i += self.cols
+			
+			self.categories_.append(self.cDict)
+
+			cNumber += 1
 		
-#		for c in  :
-#		self.d[c]["title"] = ...
-#		self.pred["rounds"][self.r]["categories"] = self.d
+		self.pred.rounds[self.row]["categories"] = self.categories_
+#self.pred.rounds[self.row]["categories"].append(self.categories_)
 		self.close()    
 
 	def closeEvent(self, event):

@@ -17,7 +17,6 @@ class RoundsEditor(QWidget):
         self.jsondict = {}
         self.jsondict["type"] = "html"
         self.jsondict["template"] = "template.html"
-        
         self.isOpen = False
 	
     def setupGui(self):
@@ -142,7 +141,7 @@ class RoundsEditor(QWidget):
         print self.rounds
         
         if self.isOpen == False:
-            self.round_ =  mainWindow(self.rounds[row]['title'], self.size["width"], self.size["height"], self)
+            self.round_ =  mainWindow(row, self.rounds[row]['title'], self.size["width"], self.size["height"], self)
             self.isOpen = True
             self.round_.show()
         else:
