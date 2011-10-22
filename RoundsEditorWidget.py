@@ -1,4 +1,5 @@
 import sys
+import json
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from gameEditor import mainWindow
@@ -158,7 +159,11 @@ class RoundsEditor(QWidget):
         self.rounds = self.rounds[:-1]
         self.jsondict["size"] = self.size
         self.jsondict["rounds"] = self.rounds
-        print self.jsondict
+        self.js = json.dumps(self.jsondict)
+
+        f = file("json.rules", "w")
+        f.write(self.js)
+        f.close()
         self.close()
         
     def getLabelNumber(self, i):
